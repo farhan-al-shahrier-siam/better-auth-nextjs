@@ -3,45 +3,25 @@ import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 
-const SignUpPage = () => {
+const SignInPage = () => {
     const onSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const formData = new FormData(e.currentTarget);
-        const userData = Object.fromEntries(formData.entries());
+        const userData = Object.fromEntries(formData.entries())
         console.log(userData)
-        const { data, error } = await authClient.signUp.email({
-            name: userData.name,
+
+        const {data, error} = await authClient.signIn.email({
             email: userData.email,
             password: userData.password,
+            rememberMe: true,
             callbackURL: "/"
-        });
-        console.log(data, error);
-        if(error){
-            alert("Error signing up..."+error.message)
-        }if(data){
-            alert("Sign up successful. Please check mail")
-        }
+        })
     };
 
     return (
         <div>
-            <h2>Please sign Up</h2>
+            <h2>Please Sign In</h2>
             <Form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
-                <TextField
-                    isRequired
-                    name="name"
-                    validate={(value) => {
-                        if (value.length < 3) {
-                            return "Name must be at least 3 characters";
-                        }
-                        return null;
-                    }}
-                >
-                    <Label>Name</Label>
-                    <Input name="name" placeholder="Your name" />
-                    <FieldError />
-                </TextField>
-
                 <TextField
                     isRequired
                     name="email"
@@ -94,4 +74,4 @@ const SignUpPage = () => {
     );
 };
 
-export default SignUpPage;
+export default SignInPage;
