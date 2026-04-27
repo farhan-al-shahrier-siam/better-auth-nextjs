@@ -18,7 +18,7 @@ const SignInPage = () => {
             email: userData.email,
             password: userData.password,
             rememberMe: true,
-            callbackURL: "/",
+            callbackURL: "/dashboard",
         });
     };
 
@@ -41,7 +41,7 @@ const SignInPage = () => {
                     <Input name="email" placeholder="Your email" />
                     <FieldError />
                 </TextField>
-                <TextField className="w-full max-w-[280px]" name="password">
+                <TextField className="w-full max-w-70" name="password">
                     <Label>Password</Label>
                     <InputGroup>
                         <InputGroup.Input 
